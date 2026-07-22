@@ -1,0 +1,61 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 4,
+  "final_space": true,
+
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+
+      "segments": [
+        {
+          "type": "text",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b0",
+          "foreground": "#ffffff",
+
+          "background_templates": [
+            "{{ if and .WSL (eq .Shell \"bash\") }}#3C873A{{ end }}",
+            "{{ if and .WSL (eq .Shell \"pwsh\") }}#6F42C1{{ end }}",
+            "{{ if not .WSL }}#0078D4{{ end }}"
+          ],
+
+          "template": " {{ if .WSL }}🐧{{ else }}🪟{{ end }} {{ .Shell }} "
+        },
+
+        {
+          "type": "path",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b0",
+          "foreground": "#000000",
+          "background": "#E9A03B",
+          "options": {
+            "style": "full",
+            "mapped_locations": {
+              "C:\\Repo\\*": "\uE5FB "
+            }
+          },
+          "template": " {{ .Path }} "
+        },
+
+        {
+          "type": "git",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b0",
+          "foreground": "#ffffff",
+
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}#DC3545{{ else }}#198754{{ end }}"
+          ],
+
+          "options": {
+            "fetch_status": true
+          },
+          "template": " {{ .HEAD }}{{ if gt .WorktreeCount 1 }} [{{ .WorktreeCount }}]{{ end }} "
+        }
+      ]
+    }
+  ]
+}
