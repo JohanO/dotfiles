@@ -1,2 +1,2 @@
 # dotfiles
-Various tool configuration failes
+Various tool configuration files
