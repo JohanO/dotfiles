@@ -17,12 +17,12 @@
           "foreground": "#ffffff",
 
           "background_templates": [
-            "{{ if and .WSL (eq .Shell \"bash\") }}#3C873A{{ end }}",
-            "{{ if and .WSL (eq .Shell \"pwsh\") }}#6F42C1{{ end }}",
-            "{{ if not .WSL }}#0078D4{{ end }}"
+            "{{ if and (or .WSL (contains \"linux\" (lower .OS))) (eq .Shell \"bash\") }}#3C873A{{ end }}",
+            "{{ if and (or .WSL (contains \"linux\" (lower .OS))) (eq .Shell \"pwsh\") }}#6F42C1{{ end }}",
+            "{{ if not (or .WSL (contains \"linux\" (lower .OS))) }}#0078D4{{ end }}"
           ],
 
-          "template": " {{ if .WSL }}🐧{{ else }}🪟{{ end }} {{ .Shell }} "
+          "template": " {{ if or .WSL (contains \"linux\" (lower .OS)) }}🐧{{ else }}🪟{{ end }} {{ .Shell }} "
         },
 
         {
